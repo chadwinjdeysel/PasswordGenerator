@@ -1,0 +1,149 @@
+﻿@model RandomPasswordGenerator.ViewModels.Password
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section Styles {
+    <style>
+
+        .range-wrap {
+            position: relative;
+            margin: 0 auto 3rem;
+        }
+
+        .range {
+            width: 100%;
+        }
+
+        .bubble {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            position: absolute;
+            border-radius: 4px;
+            left: 50%;
+            top: 1.5em;
+            transform: translateX(-51%);
+        }
+
+            .bubble::after {
+                content: "";
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: var(--primary);
+                top: -1px;
+                left: 50%;
+            }
+
+    </style>
+}
+
+
+<div class="row body-wrapper align-items-center justify-content-center">
+    <div class="card col-8 ">
+        <div class="card-body">
+            <h1 class="text-center">Password Generator</h1>
+            <form method="POST">
+
+                <div class="form-group">
+                    <label asp-for="PasswordLength"></label>
+                    <div class="range-wrap">
+                        <input type="range" class="range" min="8" max="16" asp-for="PasswordLength">
+                        <output class="bubble"></output>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-6">
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="lowerCase" checked disabled>
+                            <label class="custom-control-label" for="lowerCase">Uppercase Characters</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" asp-for="UpperCase">
+                            <label class="custom-control-label" for="UpperCase">Uppercase Characters</label>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" asp-for="Numbers">
+                            <label class="custom-control-label" for="Numbers">Numbers</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" asp-for="SpecialChar">
+                            <label class="custom-control-label" for="SpecialChar">Special Characters</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center my-4">
+                    <button type="submit" class="btn btn-primary px-5">Generate</button>
+                </div>
+            </form>
+
+            @if (!String.IsNullOrEmpty(Model.PasswordGenerated))
+            {
+                <div class="text-center">
+                    <h2>Your Password</h2>
+
+                    <span style="font-size: 125%"
+                          id="passwordIsHere"
+                          class="mx-3">
+                        @Model.PasswordGenerated
+                    </span>
+                    <button class="btn btn-outline-dark btn-sm" onclick="copyToClipboard()">
+                        <i class="far fa-copy"></i>
+                    </button>
+                </div>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+<script>
+    const allRanges = document.querySelectorAll(".range-wrap");
+    allRanges.forEach(wrap => {
+        const range = wrap.querySelector(".range");
+        const bubble = wrap.querySelector(".bubble");
+
+        range.addEventListener("input", () => {
+            setBubble(range, bubble);
+        });
+        setBubble(range, bubble);
+    });
+
+    function setBubble(range, bubble) {
+        const val = range.value;
+        const min = range.min ? range.min : 0;
+        const max = range.max ? range.max : 100;
+        const newVal = Number(((val - min) * 100) / (max - min));
+        bubble.innerHTML = val;
+
+        // Sorta magic numbers based on size of the native UI thumb
+        bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+    }
+
+    function copyToClipboard()
+    {
+        var copyText = document.getElementById("passwordIsHere");
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText.textContent;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand("Copy");
+        textArea.remove();
+
+        alert("Password was copied to clipboard")
+    }
+</script>
+    
+}
