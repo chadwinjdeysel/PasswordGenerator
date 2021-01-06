@@ -14,6 +14,7 @@ dotnet run
 4. Open the program on the browser of your choice using localhost:5000/Home
 
 ## Requirements
-To run the app you will need to have installed the .Net Core 3.0 SDK. Install it using the instructions [here](https://dotnet.microsoft.com/download/dotnet-core/3.0) 
+To run the app, the .Net Core 3.0 SDK must be installed. 
+Install it using the instructions [here](https://dotnet.microsoft.com/download/dotnet-core/3.0) 
 
 
