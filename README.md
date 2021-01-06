@@ -3,10 +3,14 @@ Allows user to generate a password based on their required length and which char
 
 ## How to use
 1. Clone the repo to your machine
-`code` $ git clone https://github.com/chadwinjdeysel/PasswordGenerator.git
+```
+$ git clone https://github.com/chadwinjdeysel/PasswordGenerator.git
+```
 2. Open the project folder in Powershell
 3. Run the project
-`code` dotnet run
+```
+dotnet run
+```
 4. Open the program on the browser of your choice using localhost:5000/Home
 
 ## Requirements
