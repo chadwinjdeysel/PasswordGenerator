@@ -59,7 +59,7 @@
 
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" id="lowerCase" checked disabled>
-                            <label class="custom-control-label" for="lowerCase">Uppercase Characters</label>
+                            <label class="custom-control-label" for="lowerCase">Lowercase Characters</label>
                         </div>
 
                         <div class="custom-control custom-checkbox">
@@ -110,6 +110,8 @@
 
 @section Scripts{ 
 <script>
+
+    // sets number display under slider 
     const allRanges = document.querySelectorAll(".range-wrap");
     allRanges.forEach(wrap => {
         const range = wrap.querySelector(".range");
@@ -127,11 +129,11 @@
         const max = range.max ? range.max : 100;
         const newVal = Number(((val - min) * 100) / (max - min));
         bubble.innerHTML = val;
-
-        // Sorta magic numbers based on size of the native UI thumb
         bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
     }
 
+
+    // copy yo clipboard functionality
     function copyToClipboard()
     {
         var copyText = document.getElementById("passwordIsHere");
