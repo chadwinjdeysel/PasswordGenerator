@@ -6,8 +6,12 @@ Allows user to generate a password based on their required length and which char
 ```
 $ git clone https://github.com/chadwinjdeysel/PasswordGenerator.git
 ```
-2. Open the project folder in Powershell
-3. Run the project
+2. Open the solution folder in Powershell
+3. Enter the project folder
+```
+cd PasswordGenerator
+```
+5. Run the project
 ```
 dotnet run
 ```
