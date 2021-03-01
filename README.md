@@ -6,7 +6,7 @@ Allows user to generate a password based on their required length and which char
 ```
 $ git clone https://github.com/chadwinjdeysel/PasswordGenerator.git
 ```
-2. Open the solution folder in Powershell
+2. Open the solution folder your terminal of choice
 3. Enter the project folder
 ```
 cd PasswordGenerator
